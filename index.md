@@ -69,7 +69,10 @@ We anticipate that transfer learning architectures such as ResNet will outperfor
 # References
 
 [1] K. He, X. Zhang, S. Ren, and J. Sun, “Deep Residual Learning for Image Recognition,” in Proc. CVPR, 2016. 
-[2] G. Litjens, T. Kooi, B. E. Bejnordi, et al., “A Survey on Deep Learning in Medical Image Analysis,” Medical Image Analysis, vol. 42, pp. 60–88, 2017.tworks,” Proc. IEEE ICIP, 2018, pp. 3129–3133. 
+
+[2] G. Litjens, T. Kooi, B. E. Bejnordi, et al., “A Survey on Deep Learning in Medical Image Analysis,” Medical Image Analysis, vol. 42, pp. 60–88, 
+2017.tworks,” Proc. IEEE ICIP, 2018, pp. 3129–3133. 
+
 [3] A. Afshar, A. Mohammadi, and K. Plataniotis, “Brain tumor type classification via capsule networks,” IEEE ICIP, 2018, pp. 3129–3133.
 
 # Contributions
