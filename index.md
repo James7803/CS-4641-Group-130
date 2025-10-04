@@ -78,6 +78,6 @@ We anticipate that transfer learning architectures such as ResNet will outperfor
 |-----------------------|--------------------------------------|
 | **Colin Shaw**        | Github repo/pages and problem definition |
 | **Eduardo Romero Serra** | Team Organization / Methods        |
-| **Vinayak Ramasubramanian** | Topic research & ideation / Results |
+| **Vinayak Ramasubramanian** | Topic research & ideation / Results / Markdown formatting|
 | **Xingjian Ren**      |                                      |
 | **Matthew Sampt**     |                                      |
