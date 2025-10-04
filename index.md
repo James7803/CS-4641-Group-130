@@ -82,5 +82,8 @@ We anticipate that transfer learning architectures such as ResNet will outperfor
 | **Colin Shaw**        | Github repo/pages and problem definition |
 | **Eduardo Romero Serra** | Team Organization / Methods / Presentation and Video|
 | **Vinayak Ramasubramanian** | Topic research & ideation / Results / Markdown formatting|
-| **Xingjian Ren**      |         Gantt Chart                             |
-| **Matthew Sampt**     |                                      |
+| **Xingjian Ren**      | Gantt Chart|
+| **Matthew Sampt**     | Introduction / Markdown Formatting|
+
+# Gantt Chart
+[Gantt Chart](https://docs.google.com/spreadsheets/d/1DeXpFdrviHhOgzM-KoJsPBr04g7CaRDW/edit?usp=sharing&ouid=112407754076113639711&rtpof=true&sd=true)
