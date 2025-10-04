@@ -85,5 +85,5 @@ We anticipate that transfer learning architectures such as ResNet will outperfor
 | **Xingjian Ren**      | Gantt Chart|
 | **Matthew Sampt**     | Introduction / Markdown Formatting|
 
-# [Gantt Chart](https://docs.google.com/spreadsheets/d/1DeXpFdrviHhOgzM-KoJsPBr04g7CaRDW/edit?usp=sharing&ouid=112407754076113639711&rtpof=true&sd=true)
+<h1><a href="https://docs.google.com/spreadsheets/d/1DeXpFdrviHhOgzM-KoJsPBr04g7CaRDW/edit?usp=sharing" style="color:inherit; text-decoration:none;">Gantt Chart</a></h1>
 
