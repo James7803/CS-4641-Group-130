@@ -1,3 +1,9 @@
+---
+layout: default
+title: Brain Tumor Classification Project
+description: Reducing uncertainty in brain tumor diagnosis using machine learning.
+---
+
 # Brain Tumor Classification Project
 
 # Introduction

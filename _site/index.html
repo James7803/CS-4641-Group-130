@@ -4,20 +4,20 @@
     <meta charset="UTF-8">
 
 <!-- Begin Jekyll SEO tag v2.8.0 -->
-<title>Cayman theme | Cayman is a clean, responsive theme for GitHub Pages.</title>
+<title>Brain Tumor Classification Project | Cayman theme</title>
 <meta name="generator" content="Jekyll v4.4.1" />
-<meta property="og:title" content="Project Proposal" />
+<meta property="og:title" content="Brain Tumor Classification Project" />
 <meta property="og:locale" content="en_US" />
-<meta name="description" content="Colin Shaw, Eduardo Romero Serra, Vinayak Ramasubramanian, Xingjian Ren, Matthew Sampt" />
-<meta property="og:description" content="Cayman is a clean, responsive theme for GitHub Pages." />
+<meta name="description" content="Reducing uncertainty in brain tumor diagnosis using machine learning." />
+<meta property="og:description" content="Reducing uncertainty in brain tumor diagnosis using machine learning." />
 <link rel="canonical" href="http://0.0.0.0:4000/" />
 <meta property="og:url" content="http://0.0.0.0:4000/" />
-<meta property="og:site_name" content="Project Proposal" />
+<meta property="og:site_name" content="Cayman theme" />
 <meta property="og:type" content="website" />
 <meta name="twitter:card" content="summary" />
-<meta property="twitter:title" content="Cayman theme" />
+<meta property="twitter:title" content="Brain Tumor Classification Project" />
 <script type="application/ld+json">
-{"@context":"https://schema.org","@type":"WebSite","description":"Cayman is a clean, responsive theme for GitHub Pages.","headline":"Cayman theme","name":"Cayman theme","url":"http://0.0.0.0:4000/"}</script>
+{"@context":"https://schema.org","@type":"WebSite","description":"Reducing uncertainty in brain tumor diagnosis using machine learning.","headline":"Brain Tumor Classification Project","name":"Cayman theme","url":"http://0.0.0.0:4000/"}</script>
 <!-- End Jekyll SEO tag -->
 
     <link rel="preconnect" href="https://fonts.gstatic.com">
@@ -42,174 +42,129 @@
     <a id="skip-to-content" href="#content">Skip to the content.</a>
 
     <header class="page-header" role="banner">
-      <h1 class="project-name">Project Proposal: Brain Tumor Classification</h1>
-      <h2 class="project-tagline">Team 130: Colin Shaw, Eduardo Romero Serra, Vinayak Ramasubramanian, Xingjian Ren, Matthew Sampt</h2>
+      <h1 class="project-name">Brain Tumor Classification Project</h1>
+      <h2 class="project-tagline">Reducing uncertainty in brain tumor diagnosis using machine learning.</h2>
+      
+      
+        <a href="" class="btn">Download .zip</a>
+        <a href="" class="btn">Download .tar.gz</a>
       
     </header>
 
     <main id="content" class="main-content" role="main">
+      <h1 id="brain-tumor-classification-project">Brain Tumor Classification Project</h1>
 
+<h1 id="introduction">Introduction</h1>
 
-<h1 id="header-1">Introduction/Background</h1>
+<p>Brain tumors are abnormal growths within the brain. Tumors cause pressure build-up within the skull, often leading to severe complications and death. Cancerous or not, tumors interfere with critical neurological functions, necessitating timely detection.</p>
 
-<p>This is a normal paragraph following a header. GitHub is a code hosting platform for version control and collaboration. It lets you and others work together on projects from anywhere.</p>
+<p>Earlier literature demonstrates that traditional image processing often struggles with categorizing brain tumors due to their wide variability. However, recent developments in deep learning have shown promise in improving accuracy in tumor classification.</p>
 
-<h1 id="header-2">Problem Definition</h1>
+<p>To amass data about tumors, we are using the publicly available <a href="https://www.kaggle.com/datasets/masoudnickparvar/brain-tumor-mri-dataset">Brain Tumor MRI Dataset</a>. This dataset contains over seven thousand Magnetic Resonance Imaging (MRI) scans of human brains. Each image is labeled by its respective tumor category or lack thereof.</p>
 
-<p>Diagnosing brain tumors from medical images is a complex process that is not always foolproof. Our project will give a second opinion for radiologists to ensure that they have made 
-  little to no oversights in their diagnosis of the patient into four distinct categories: Glioma, meningioma(non-cancerous), pituitary, and no tumor(healthy). Additionally, classifying 
-  the tumor by grade will aid in streamlining patients’ treatment. </p>
+<h1 id="problem-definition">Problem Definition</h1>
 
-<h1 id="header-3">Methods</h1>
+<p>Diagnosing brain tumors from medical images is a complex process that is not always foolproof. Our project will give a second opinion for radiologists to ensure that they have made little to no oversights in their diagnosis of the patient into four distinct categories: Glioma, meningioma (non-cancerous), pituitary, and no tumor (healthy). Additionally, classifying the tumor by grade will aid in streamlining patients’ treatment.</p>
 
-<p>This is a normal paragraph following a header. GitHub is a code hosting platform for version control and collaboration. It lets you and others work together on projects from anywhere.</p>
+<p>Diagnosing tumors is further complicated by variability in MRI acquisition and tumor appearance, which can lead to inconsistent readings across clinicians. Our system aims to provide a consistent, reproducible second opinion across the four classes, as well as offer a preliminary tumor-grade suggestion to help triage cases and streamline follow-up imaging and treatment planning.</p>
 
-<!-- <div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// Javascript code with syntax highlighting.</span>
-<span class="kd">var</span> <span class="nx">fun</span> <span class="o">=</span> <span class="kd">function</span> <span class="nf">lang</span><span class="p">(</span><span class="nx">l</span><span class="p">)</span> <span class="p">{</span>
-  <span class="nx">dateformat</span><span class="p">.</span><span class="nx">i18n</span> <span class="o">=</span> <span class="nf">require</span><span class="p">(</span><span class="dl">'</span><span class="s1">./lang/</span><span class="dl">'</span> <span class="o">+</span> <span class="nx">l</span><span class="p">)</span>
-  <span class="k">return</span> <span class="kc">true</span><span class="p">;</span>
-<span class="p">}</span>
-</code></pre></div></div>
+<h1 id="methodology">Methodology</h1>
 
-<div class="language-ruby highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># Ruby code with syntax highlighting</span>
-<span class="no">GitHubPages</span><span class="o">::</span><span class="no">Dependencies</span><span class="p">.</span><span class="nf">gems</span><span class="p">.</span><span class="nf">each</span> <span class="k">do</span> <span class="o">|</span><span class="n">gem</span><span class="p">,</span> <span class="n">version</span><span class="o">|</span>
-  <span class="n">s</span><span class="p">.</span><span class="nf">add_dependency</span><span class="p">(</span><span class="n">gem</span><span class="p">,</span> <span class="s2">"= </span><span class="si">#{</span><span class="n">version</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
-<span class="k">end</span>
-</code></pre></div></div> -->
+<p>To classify brain tumors from MRI scans, our team’s approach combines robust preprocessing, supervised deeper learning models, and transfer learning to maximize accuracy and generalizability.</p>
 
-<h1 id="header-4">Potential Results and Discussion</h1>
+<h2 id="data-processing">Data Processing</h2>
 
-<p>This is a normal paragraph following a header. GitHub is a code hosting platform for version control and collaboration. It lets you and others work together on projects from anywhere.</p>
+<p>All images will be normalized so that pixel intensities fall within a standard range between 0 and 1, which stabilizes gradient descent during training. Images will then be resized to a consistent resolution like <code class="language-plaintext highlighter-rouge">224x224</code> to match the input requirements of common convolutional neural network (CNN) architectures.</p>
 
-<!-- <ul>
-  <li>This is an unordered list following a header.</li>
-  <li>This is an unordered list following a header.</li>
-  <li>This is an unordered list following a header.</li>
-</ul> -->
+<p>Data segmentation methods such as random rotations, horizontal/vertical flips, zoom, and contrast adjustments will be applied using:</p>
 
-<h1 id="header-5">References</h1>
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">tensorflow.keras.preprocessing.image.ImageDataGenerator</code></li>
+  <li><code class="language-plaintext highlighter-rouge">torchvision.transforms</code></li>
+</ul>
 
-<p>This is a normal paragraph following a header. GitHub is a code hosting platform for version control and collaboration. It lets you and others work together on projects from anywhere.</p>
+<p>to artificially expand the dataset and reduce overfitting.</p>
 
-<!-- <ol>
-  <li>This is an ordered list following a header.</li>
-  <li>This is an ordered list following a header.</li>
-  <li>This is an ordered list following a header.</li>
-</ol> -->
+<p>As a final processing measure, the team will perform train-validation-test splits with stratification to ensure balanced class distribution across the four tumor categories.</p>
 
-<h1 id="header-6">Gantt Chart</h1>
+<h2 id="machine-learning-models">Machine Learning Models</h2>
 
+<p>The team determined that convolutional neural networks (CNNs) would serve as great primary models for this application, given that they are great fits for spatial image recognition features.</p>
 
+<p>A baseline CNN will be constructed with multiple convolution, pooling, and fully connected layers using libraries like <code class="language-plaintext highlighter-rouge">torch.nn</code> or <code class="language-plaintext highlighter-rouge">keras.layers</code>.</p>
 
-<h1 id="contributions">Contributions Table</h1>
+<p>The team will then pursue transfer learning with architectures trained on ImageNet such as <strong>ResNet50</strong>, <strong>EfficientNetB0</strong>, and <strong>VGG16</strong>. These would be implemented through their respective functions:</p>
+
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">torchvision.models.resnet50</code></li>
+  <li><code class="language-plaintext highlighter-rouge">tensorflow.keras.applications.EfficientNetB0</code></li>
+  <li><code class="language-plaintext highlighter-rouge">keras.applications.vgg16.VGG16</code></li>
+</ul>
+
+<p>Residual networks such as ResNet make very deep models trainable and effective, providing a strong structure for fine-tuning on medical images [1]. Additionally, surveys of medical image analysis show that transfer learning generally improves performance when there is limited amount of labeled data [2], which is something that commonly happens in MRI datasets.</p>
+
+<p>To wrap up the methodology, the team will compare a traditional baseline using engineered features like <strong>HOG</strong> or <strong>PCA</strong>, followed by a <strong>Random Forest Classifier</strong>. This procedure will allow the team to understand the differences in performance between deep-learning and classical baseline approaches.</p>
+
+<h2 id="supervised-learning">Supervised Learning</h2>
+
+<p>The problem will be framed as a supervised multi-class classification task with four labels: <strong>glioma, meningioma, pituitary, and healthy</strong>.</p>
+
+<p>The team will train models on labeled MRI images and optimize <strong>categorical cross-entropy loss</strong> with the <strong>Adam optimizer</strong>.</p>
+
+<p>Model evaluation will use <strong>accuracy, F-score, and confusion matrices</strong> to ensure reliable clinical performance.</p>
+
+<h1 id="results">Results</h1>
+
+<p>We will evaluate the performance of our brain tumor classification models using multiple quantitative metrics. We will strive for a high accuracy in predictions while precision, recall, and F score will ensure that performance is balanced across all tumor categories. In addition, we will use the area under the ROC curve to measure separability between classes and confusion matrices to identify specific error patterns.</p>
+
+<p>Our target is to achieve at least 80% accuracy with consistent precision and recall across the four classes: glioma, meningioma, pituitary, and no tumor. Meeting these benchmarks will demonstrate the model’s robustness and reduce the risk of bias toward particular tumor types. Our broader goal is to create a lightweight model suitable for hospital environments that functions as a decision support tool for radiologists. Ethical considerations will remain central, ensuring that the model supports rather than replaces clinical judgment.</p>
+
+<p>We anticipate that transfer learning architectures such as ResNet will outperform baseline CNNs, as demonstrated in prior studies on medical imaging [3]. With proper preprocessing and training, our system should provide reliable second opinions, helping radiologists reduce diagnostic oversights and improving patient outcomes.</p>
+
+<h1 id="references">References</h1>
+
+<p>[1] K. He, X. Zhang, S. Ren, and J. Sun, “Deep Residual Learning for Image Recognition,” in Proc. CVPR, 2016.</p>
+
+<p>[2] G. Litjens, T. Kooi, B. E. Bejnordi, et al., “A Survey on Deep Learning in Medical Image Analysis,” Medical Image Analysis, vol. 42, pp. 60–88, 
+2017.tworks,” Proc. IEEE ICIP, 2018, pp. 3129–3133.</p>
+
+<p>[3] A. Afshar, A. Mohammadi, and K. Plataniotis, “Brain tumor type classification via capsule networks,” IEEE ICIP, 2018, pp. 3129–3133.</p>
+
+<h1 id="contributions">Contributions</h1>
 
 <table>
   <thead>
     <tr>
-      <th style="text-align: left">Names</th>
-      <th style="text-align: left">Proposal Contributions</th>
+      <th>Name</th>
+      <th>Proposal Contribution</th>
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td style="text-align: left">Colin Shaw</td>
-      <td style="text-align: left">Github repo/pages and problem definition</td>
+      <td><strong>Colin Shaw</strong></td>
+      <td>Github repo/pages and problem definition</td>
     </tr>
     <tr>
-      <td style="text-align: left">Eduardo Romero Serra </td>
-      <td style="text-align: left">...</td>
+      <td><strong>Eduardo Romero Serra</strong></td>
+      <td>Team Organization / Methods / Presentation and Video</td>
     </tr>
     <tr>
-      <td style="text-align: left">Vinayak Ramasubramanian </td>
-      <td style="text-align: left">... </td>
+      <td><strong>Vinayak Ramasubramanian</strong></td>
+      <td>Topic research &amp; ideation / Results / Markdown formatting</td>
     </tr>
     <tr>
-      <td style="text-align: left">Xingjian Ren</td>
-      <td style="text-align: left">... </td>
+      <td><strong>Xingjian Ren</strong></td>
+      <td>Gantt Chart</td>
     </tr>
     <tr>
-      <td style="text-align: left">Matthew Sampt</td>
-      <td style="text-align: left">... </td>
+      <td><strong>Matthew Sampt</strong></td>
+      <td>Introduction / Markdown Formatting</td>
     </tr>
   </tbody>
 </table>
 
-<!-- <hr />
+<h1 id="gantt-chart"><a href="https://docs.google.com/spreadsheets/d/1DeXpFdrviHhOgzM-KoJsPBr04g7CaRDW/edit?usp=sharing&amp;ouid=112407754076113639711&amp;rtpof=true&amp;sd=true">Gantt Chart</a></h1>
 
-<h3 id="here-is-an-unordered-list">Here is an unordered list:</h3>
-
-<ul>
-  <li>Item foo</li>
-  <li>Item bar</li>
-  <li>Item baz</li>
-  <li>Item zip</li>
-</ul>
-
-<h3 id="and-an-ordered-list">And an ordered list:</h3>
-
-<ol>
-  <li>Item one</li>
-  <li>Item two</li>
-  <li>Item three</li>
-  <li>Item four</li>
-</ol>
-
-<h3 id="and-a-nested-list">And a nested list:</h3>
-
-<ul>
-  <li>level 1 item
-    <ul>
-      <li>level 2 item</li>
-      <li>level 2 item
-        <ul>
-          <li>level 3 item</li>
-          <li>level 3 item</li>
-        </ul>
-      </li>
-    </ul>
-  </li>
-  <li>level 1 item
-    <ul>
-      <li>level 2 item</li>
-      <li>level 2 item</li>
-      <li>level 2 item</li>
-    </ul>
-  </li>
-  <li>level 1 item
-    <ul>
-      <li>level 2 item</li>
-      <li>level 2 item</li>
-    </ul>
-  </li>
-  <li>level 1 item</li>
-</ul>
-
-<h3 id="small-image">Small image</h3>
-
-<p><img src="https://github.githubassets.com/images/icons/emoji/octocat.png" alt="Octocat" /></p>
-
-<h3 id="large-image">Large image</h3>
-
-<p><img src="https://guides.github.com/activities/hello-world/branching.png" alt="Branching" /></p>
-
-<h3 id="definition-lists-can-be-used-with-html-syntax">Definition lists can be used with HTML syntax.</h3>
-
-<dl>
-<dt>Name</dt>
-<dd>Godzilla</dd>
-<dt>Born</dt>
-<dd>1952</dd>
-<dt>Birthplace</dt>
-<dd>Japan</dd>
-<dt>Color</dt>
-<dd>Green</dd>
-</dl> -->
-<!-- 
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Long, single-line code blocks should not wrap. They should horizontally scroll if they are too long. This line should be long enough to demonstrate this.
-</code></pre></div></div>
-
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>The final element.
-</code></pre></div></div> -->
 
 
       <footer class="site-footer">
