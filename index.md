@@ -101,7 +101,7 @@ The confusion matrices in Figure 4 highlight class specific behavior, with **No 
 
 Figure 5 shows the training validation loss curves across epochs. These curves confirm that the model converged steadily within ten epochs, with training loss decreasing smoothly and validation loss stabilizing after minor fluctuation. This indicates that the CNN generalized well and without significant overfitting.
 
-![Figure 5](assets/images/LossvsEpoch.png)
+![Figure 5](assets/images/LossvsEpoch.PNG)
 *Figure 5: Training and validation loss curves across epochs.*
 
 ### Model Perfomance
@@ -114,7 +114,7 @@ Overall this model perfomed well and was consistent at identifying and different
 An overall Performance Report can be seen in Figure 6 below.
 
 ![Figure 6](assets/images/Brain_Tumor_Classification_Model_Comprehensive_Report.png)
-*Figure 6: Braom Tumor Classification - Perfomance Report.*
+*Figure 6: Brain Tumor Classification - Perfomance Report.*
 
 ### Next steps
 
