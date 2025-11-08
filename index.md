@@ -76,7 +76,7 @@ In parallel, two additional supervised transfer-learning models, fine-tuned *Res
 The implemented Convolutional Neural Network (CNN) achieves strong performance on the Brain Tumor MRI dataset. This section reports the model's overall accuracy, class-wise precision/recall/F1, confidence statistics, and confusion matrices to show where the model succeeds and where it tends to make mistakes.
 
 **Overall performance:** The Accurracy and Preciision/Recall/F1/Support values gathered from running the CNN over a training set of 1,311 images can bee seen in Table 1.
-- **Accuracy:** 96.34%
+- **Accuracy:** 96.34%\
 | Class | Precision | Recall | F1 | Support |
 |------------|-------|-------|-------|------|
 | **glioma** | 0.952 | 0.927 | 0.939 | 300 |
