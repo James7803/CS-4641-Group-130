@@ -77,6 +77,7 @@ The implemented Convolutional Neural Network (CNN) achieves strong performance o
 
 **Overall performance:** The Accurracy and Preciision/Recall/F1/Support values gathered from running the CNN over a training set of 1,311 images can bee seen in Table 1.
 - **Accuracy:** 96.34%
+
 *Table 1: Overall performance (Testing set, 1,311 images)*
 | Class | Precision | Recall | F1 | Support |
 |------------|-------|-------|-------|------|
