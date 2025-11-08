@@ -78,7 +78,7 @@ The implemented Convolutional Neural Network (CNN) achieves strong performance o
 **Overall performance:** The Accurracy and Preciision/Recall/F1/Support values gathered from running the CNN over a training set of 1,311 images can bee seen in Table 1.
 - **Accuracy:** 96.34%
 | Class | Precision | Recall | F1 | Support |
-|---|---|---|---|---|
+|------------|-------|-------|-------|------|
 | **glioma** | 0.952 | 0.927 | 0.939 | 300 |
 | **meningioma** | 0.928 | 0.922 | 0.925 | 306 |
 | **no tumor** | 0.978 | 1.000 | 0.989 | 405 |
