@@ -13,3 +13,5 @@
     - `NN.ipynb`: Jupyter notebook that trains a 3-layer CNN, saves `brain_tumor_cnn.pth`, and reports accuracy, confusion matrices, and confidence statistics.
     - `Preprocessing.py`: The data preprocessing script.
 * `index.md`: Contains the Markdown contents of the project website page.
+* `/assests/`
+    - `images/`: Contains images used for figures on the website.
