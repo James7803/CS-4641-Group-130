@@ -74,13 +74,15 @@ The implemented Convolutional Neural Network (CNN) achieves strong performance o
 
 
 *Table 1: Overall performance (Testing set, 1,311 images)*
-| Class | Precision | Recall | F1 | Support |
-|------------|-------|-------|-------|------|
-| **glioma** | 0.952 | 0.927 | 0.939 | 300 |
-| **meningioma** | 0.928 | 0.922 | 0.925 | 306 |
-| **no tumor** | 0.978 | 1.000 | 0.989 | 405 |
-| **pituitary** | 0.990 | 0.993 | 0.992 | 300 |
-| **Macro averages** | **0.962** | **0.960** | **0.961** | - |
+
+| Class         | Precision | Recall | F1    | Support |
+|---------------|-----------|--------|-------|---------|
+| **glioma**     | 0.952     | 0.927  | 0.939 | 300     |
+| **meningioma** | 0.928     | 0.922  | 0.925 | 306     |
+| **no tumor**   | 0.978     | 1.000  | 0.989 | 405     |
+| **pituitary**  | 0.990     | 0.993  | 0.992 | 300     |
+| **Macro avg**  | **0.962** | **0.960** | **0.961** | — |
+
 
 **Confidence summary:** For both splits the average prediction confidence is high, with Training 0.9982 ± 0.0142 and Testing 0.9835 ± 0.0638. On the test set, correct predictions are more confident (0.9883 ± 0.0524) than incorrect ones (0.8552 ± 0.1486), which is consistent with a well-behaved classifier. These values can be seen in further detail on Figure 3 below.
 
