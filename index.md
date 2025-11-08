@@ -67,12 +67,22 @@ This CNN was selected because it is easy to understand, fast to train, and well 
 
 ### Supervised Learning
 
-The task is framed as four-class supervised classification with labels glioma, meningioma, pituitary, and no tumor. Labeled images are fed in small batches, the CNN predicts class logits, and the model is updated by minimizing cross-entropy loss with `Adam`. Standard metrics like accuracy, precision, recall, and F1 are reported and confusion matrices are visualized in *Results* to understand which tumor types are most often confused.
+The task is framed as four-class supervised classification with labels glioma, meningioma, pituitary, and no tumor. Labeled images are fed in small batches, the CNN predicts class logits, and the model is updated by minimizing cross-entropy loss with `Adam`. Standard metrics like accuracy, precision, recall, and F1 are reported and confusion matrices are visualized in *Results* to understand which tumor types are most often confused by the model.
 
 In parallel, two additional supervised transfer-learning models, fine-tuned *ResNet-50* and *EfficientNet-B0*, are being developed for comparison, while an **unsupervised k-Means clustering** approach is also being explored to group MRI features without labels as a potential addition for the final product.
 
 # Results
 
+The implemented Convolutional Neural Network (CNN) achieves strong performance on the Brain Tumor MRI dataset. This section reports the model's overall accuracy, class-wise precision/recall/F1, confidence statistics, and confusion matrices to show where the model succeeds and where it tends to make mistakes.
+
+**Overall performance (Testing set: 1,311 images):**
+- **Accuracy:** 96.34%
+- **Macro averages:** Precision 0.962, Recall 0.960, F1 0.961
+- **Per-class (Precision / Recall / F1 / Support):**
+  - **glioma:** 0.952 / 0.927 / 0.939 / 300
+  - **meningioma:** 0.928 / 0.922 / 0.925 / 306
+  - **no tumor:** 0.978 / 1.000 / 0.989 / 405
+  - **pituitary:** 0.990 / 0.993 / 0.992 / 300
 
 ----
 We will evaluate the performance of our brain tumor classification models using multiple quantitative metrics. We will strive for a high accuracy in predictions while precision, recall, and F score will ensure that performance is balanced across all tumor categories. In addition, we will use the area under the ROC curve to measure separability between classes and confusion matrices to identify specific error patterns. 
