@@ -20,48 +20,55 @@ Diagnosing brain tumors from medical images is a complex process that is not alw
 
 Diagnosing tumors is further complicated by variability in MRI acquisition and tumor appearance, which can lead to inconsistent readings across clinicians. Our system aims to provide a consistent, reproducible second opinion across the four classes, as well as offer a preliminary tumor-grade suggestion to help triage cases and streamline follow-up imaging and treatment planning. 
 
-
 # Methodology
 
 To classify brain tumors from MRI scans, our team’s approach combines robust preprocessing, supervised deeper learning models, and transfer learning to maximize accuracy and generalizability.  
 
-## Data Processing
+### Data Processing
 
-All images will be normalized so that pixel intensities fall within a standard range between 0 and 1, which stabilizes gradient descent during training. Images will then be resized to a consistent resolution like `224x224` to match the input requirements of common convolutional neural network (CNN) architectures.  
+Data was prepared in two simple steps so that images were consistent and informative for model training:
 
-Data segmentation methods such as random rotations, horizontal/vertical flips, zoom, and contrast adjustments will be applied using:  
+**Automated cleaning script (OpenCV).** This utility script converts images to grayscale, slightly removes noise with Gaussian blur, removes small artifacts, defines brain region by contours, crops to that region, enhances contrast (histogram equalization + normalization), and resizes to 256×256. Cleaned copies of the images are then saved to organized class folders.
 
-- `tensorflow.keras.preprocessing.image.ImageDataGenerator`  
-- `torchvision.transforms`  
+**Training-time transforms (PyTorch).** When loading data with `torchvision.datasets.ImageFolder`, we apply:
+- Grayscale(num_output_channels=1)
+- Resize((256, 256))
+- ToTensor()
+- Normalize(mean=0.5, std=0.5)
 
-to artificially expand the dataset and reduce overfitting.  
+Images are then read from class labeled directories. The team used PyToch DataLoader with a `BATCH_SIZE = 32` and shuffling for the training set to expose the model to varied batches each epoch.
 
-As a final processing measure, the team will perform train-validation-test splits with stratification to ensure balanced class distribution across the four tumor categories.  
+**Example training images (first: glioma, second: no tumor):**
 
-## Machine Learning Models
+![Figure 1](src/dataset/Training/glioma/Tr-gl_0021.jpg)
+*Figure 1. Example MRI slice labeled "glioma."*
 
-The team determined that convolutional neural networks (CNNs) would serve as great primary models for this application, given that they are great fits for spatial image recognition features.  
+![Figure 2](src/dataset/Training/notumor/Tr-noTr_0012.jpg)
+*Figure 2. Example MRI slice labeled "no tumor."*
 
-A baseline CNN will be constructed with multiple convolution, pooling, and fully connected layers using libraries like `torch.nn` or `keras.layers`.  
+### Machine Learning Model
+A lightweight Convolutional Neural Network (CNN) was implemented to learn special patterns within the MRI image dataset. The model is intentioanlly small so it trains quickly and runs on modest hardware while still capturing texture and shape cues for a variety of MRI image styles.
 
-The team will then pursue transfer learning with architectures trained on ImageNet such as **ResNet50**, **EfficientNetB0**, and **VGG16**. These would be implemented through their respective functions:  
+**Architecture (PyTorch):**
+- Conv blocks (×3): Conv2d → ReLU → MaxPool(2×2) with channels 1→16→32→64, kernel 3×3 (padding 1).
+- Flatten to a vector of size 64×32×32.
+- Fully connected: Linear(64×32×32 → 128) → ReLU → Linear(128 → 4).
+- The final layer outputs 4 logits (one per class).
 
-- `torchvision.models.resnet50`  
-- `tensorflow.keras.applications.EfficientNetB0`  
-- `keras.applications.vgg16.VGG16`  
+**Training setup:**
+- Loss: Cross-Entropy (standard for multi-class classification).
+- Optimizer: Adam with learning rate 0.001.
+- Batch size: 32, Epochs: 10.
 
-Residual networks such as ResNet make very deep models trainable and effective, providing a strong structure for fine-tuning on medical images [1]. Additionally, surveys of medical image analysis show that transfer learning generally improves performance when there is limited amount of labeled data [2], which is something that commonly happens in MRI datasets.  
+To monitor learning, training and evaluation loss and accuracy are printed at each epoch. After training, learned weights are saved as brain_tumor_cnn.pth so the classifier can be reloaded for evaluation or for single image predictions without retraining.
 
-To wrap up the methodology, the team will compare a traditional baseline using engineered features like **HOG** or **PCA**, followed by a **Random Forest Classifier**. This procedure will allow the team to understand the differences in performance between deep-learning and classical baseline approaches.  
+This CNN was selected because it is easy to understand, fast to train, and well-suited for recognizing localized features such as edges, textures, and shapes which are common when distinguishing between tumor types.
 
-## Supervised Learning
+### Supervised Learning
 
-The problem will be framed as a supervised multi-class classification task with four labels: **glioma, meningioma, pituitary, and healthy**.  
+The task is framed as four-class supervised classification with labels glioma, meningioma, pituitary, and no tumor. Labeled images are fed in small batches, the CNN predicts class logits, and the model is updated by minimizing cross-entropy loss with Adam. Standard metrics like accuracy and precision/recall/F1 are reported and confusion matrices are visualized in *Results* to understand which tumor types are most often confused.
 
-The team will train models on labeled MRI images and optimize **categorical cross-entropy loss** with the **Adam optimizer**.  
-
-Model evaluation will use **accuracy, F-score, and confusion matrices** to ensure reliable clinical performance.  
-
+In parallel, two additional supervised transfer-learning models, fine-tuned *ResNet-50* and *EfficientNet-B0*, are being developed for comparison, while an **unsupervised k-Means clustering** approach is also being explored to group MRI features without labels as a potential addition for the final product.
 
 # Results
 
