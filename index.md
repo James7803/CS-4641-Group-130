@@ -75,23 +75,41 @@ In parallel, two additional supervised transfer-learning models, fine-tuned *Res
 
 The implemented Convolutional Neural Network (CNN) achieves strong performance on the Brain Tumor MRI dataset. This section reports the model's overall accuracy, class-wise precision/recall/F1, confidence statistics, and confusion matrices to show where the model succeeds and where it tends to make mistakes.
 
-**Overall performance (Testing set: 1,311 images):**
+**Overall performance:** The Accurracy and Preciision/Recall/F1/Support values gathered from running the CNN over a training set of 1,311 images can bee seen in Table 1.
 - **Accuracy:** 96.34%
-- **Macro averages:** Precision 0.962, Recall 0.960, F1 0.961
-- **Per-class (Precision / Recall / F1 / Support):**
-  - **glioma:** 0.952 / 0.927 / 0.939 / 300
-  - **meningioma:** 0.928 / 0.922 / 0.925 / 306
-  - **no tumor:** 0.978 / 1.000 / 0.989 / 405
-  - **pituitary:** 0.990 / 0.993 / 0.992 / 300
+| Class | Precision | Recall | F1 | Support |
+|---|---|---|---|---|
+| **glioma** | 0.952 | 0.927 | 0.939 | 300 |
+| **meningioma** | 0.928 | 0.922 | 0.925 | 306 |
+| **no tumor** | 0.978 | 1.000 | 0.989 | 405 |
+| **pituitary** | 0.990 | 0.993 | 0.992 | 300 |
+| **Macro averages** | **0.962** | **0.960** | **0.961** | - |
+*Table 1: Overall performance (Testing set, 1,311 images)*
 
-----
-We will evaluate the performance of our brain tumor classification models using multiple quantitative metrics. We will strive for a high accuracy in predictions while precision, recall, and F score will ensure that performance is balanced across all tumor categories. In addition, we will use the area under the ROC curve to measure separability between classes and confusion matrices to identify specific error patterns. 
+**Confidence summary:** For both splits the average prediction confidence is high, with Training 0.9982 ± 0.0142 and Testing 0.9835 ± 0.0638. On the test set, correct predictions are more confident (0.9883 ± 0.0524) than incorrect ones (0.8552 ± 0.1486), which is consistent with a well-behaved classifier.
 
-Our target is to achieve at least 80% accuracy with consistent precision and recall across the four classes: glioma, meningioma, pituitary, and no tumor. Meeting these benchmarks will demonstrate the model’s robustness and reduce the risk of bias toward particular tumor types. Our broader goal is to create a lightweight model suitable for hospital environments that functions as a decision support tool for radiologists. Ethical considerations will remain central, ensuring that the model supports rather than replaces clinical judgment. 
+![Figure 1](path/to/your/image.png)
+*Figure 3: Summary of accuracy, class-wise metrics, and confidence statistics.*
 
-We anticipate that transfer learning architectures such as ResNet will outperform baseline CNNs, as demonstrated in prior studies on medical imaging [3]. With proper preprocessing and training, our system should provide reliable second opinions, helping radiologists reduce diagnostic oversights and improving patient outcomes. 
+### Visualization Results
 
+The confusion matrices in Figure 2 highlight class specific behavior, with **No tumor** and **pituitary** classes being classified almost perfectly. Most errors occur between **glioma** and **meningioma** classes, which are visually similar on some slices, which causes the model to occasionally confuse these two. This visualization reveals that altough the model is mostly accurrate, it has some trouble identifying differences in images that share multiple similarities.
 
+![Figure 2](path/to/your/confusion_matrix.png)
+*Figure 4: Confusion matrices for Training (left) and Testing (right).*
+
+### Model Perfomance
+
+Overall this model perfomed well and was consistent at identifying and differentiating brain tumor in the majority of cases. Why?
+- **Consistent inputs:** Data processing was key to success, with grayscale conversion, normalization, and resizing to 256×256 providing uniform inputs for learning.
+- **CNN inductive bias:** Convolutions captured local edges, textures, and shapes that distinguishd tumor types, which fit this task well.
+- **Stable optimization:** Minimizing cross-entropy loss with the Adam optimizer provided smooth and efficient convergence.
+
+### Next steps
+
+- **Model extensions:** Add two supervised transfer-learning approaches, fine-tuned ResNet-50 and EfficientNet-B0, for comparison on the same splits. This will help aliviate some of the accurracy issues between **glioma** and **meningioma**.
+- **Focused error analysis:** Further prioritize improvements on **glioma** ↔ **meningioma** separability such as targeted preprocessing or feature emphasis, and incorporate probability based evaluation plots to validate improvements.
+  
 # References
 
 [1] K. He, X. Zhang, S. Ren, and J. Sun, “Deep Residual Learning for Image Recognition,” in Proc. CVPR, 2016. 
@@ -105,11 +123,11 @@ We anticipate that transfer learning architectures such as ResNet will outperfor
 
 | Name                  | Proposal Contribution                |
 |-----------------------|--------------------------------------|
-| **Colin Shaw**        | Github repo/pages and problem definition |
-| **Eduardo Romero Serra** | Team Organization / Methods / Presentation and Video|
-| **Vinayak Ramasubramanian** | Topic research & ideation / Results / Markdown formatting|
-| **Xingjian Ren**      | Gantt Chart|
-| **Matthew Sampt**     | Introduction / Markdown Formatting|
+| **Colin Shaw**        | Data Processing and Preparation |
+| **Eduardo Romero Serra** | Team Organization / Report Writting / Gantt Chart |
+| **Vinayak Ramasubramanian** | Accurracy / Precision / Visualization |
+| **Xingjian Ren**      | Accurracy / Precision / Visualization |
+| **Matthew Sampt**     | PyTorch Model Training / Model Testing |
 
 # [Gantt Chart](https://docs.google.com/spreadsheets/d/1DeXpFdrviHhOgzM-KoJsPBr04g7CaRDW/edit?usp=sharing&ouid=112407754076113639711&rtpof=true&sd=true)
 
