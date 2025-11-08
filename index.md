@@ -40,10 +40,10 @@ Images are then read from class labeled directories. The team used PyToch DataLo
 
 **Example training images (first: glioma, second: no tumor):**
 
-![Figure 1](src/images/Training/glioma/Tr-gl_0021.jpg)\
+![Figure 1](src/images/Training/glioma/Tr-gl_0010.jpg)\
 *Figure 1. Example MRI slice labeled "glioma."*
 
-![Figure 2](src/images/Training/notumor/Tr-noTr_0012.jpg)\
+![Figure 2](src/images/Training/notumor/Tr-noTr0010.jpg)\
 *Figure 2. Example MRI slice labeled "no tumor."*
 
 ### Machine Learning Model
