@@ -3,3 +3,6 @@ description: Reducing uncertainty in brain tumor diagnosis using machine learnin
 show_downloads: true
 google_analytics:
 theme: jekyll-theme-cayman
+markdown: kramdown
+kramdown:
+  input: GFM
