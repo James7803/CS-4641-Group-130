@@ -40,7 +40,18 @@ Images are then read from class labeled directories. The team used PyTorch DataL
 ![Figure 2](src/dataset/Training/notumor/Tr-no_0393.jpg)\
 *Figure 2. Example MRI slice labeled "no tumor."*
 
-### Machine Learning Model
+### Machine Learning Models
+
+Three supervised convolutional architectures were evaluated on the same preprocessed dataset and training/testing conditions:
+
+1. **Model 1 – Baseline CNN trained from scratch**  
+2. **Model 2 – ResNet18 (transfer learning)**  
+3. **Model 3 – EfficientNet-B0 (transfer learning)**
+
+All three models were optimized with cross-entropy loss and the Adam optimizer, and all use the same batch size (32) and image resolution (256×256). This guided more focus towards architectural differences rather than processing or optimization confounds.
+
+#### Model 1 – Baseline Lightweight CNN
+
 A lightweight Convolutional Neural Network (CNN) was implemented to learn special patterns within the MRI image dataset. The model is intentionally small so it trains quickly and runs on modest hardware while still capturing texture and shape cues for a variety of MRI image styles.
 
 **Architecture (PyTorch):**
@@ -51,13 +62,50 @@ A lightweight Convolutional Neural Network (CNN) was implemented to learn specia
 
 **Training setup:**
 - Loss: Cross-Entropy, which is standard for multi-class classification.
-- Optimizer: Adam with a learning rate of 0.001.
+- Optimizer: Adam with a learning rates of 0.001, 0.005, and 0.01.
+- Epochs: 10 for LR = 0.001, 20 for LR = 0.005 & 0.01
 - Batch size: 32
-- Epochs: 10
 
-To monitor learning, training and evaluation loss and accuracy are printed at each epoch. After training, learned weights are saved as `brain_tumor_cnn.pth` so the classifier can be reloaded for evaluation or for single image predictions without retraining.
+To monitor learning, training and evaluation loss and accuracy were printed at each epoch. After training, learned weights were saved as `brain_tumor_cnn.pth` so the classifier could be reloaded for evaluation or for single image predictions without retraining.
 
-This CNN was selected because it is easy to understand, fast to train, and well suited for recognizing localized features such as edges, textures, and shapes which are common when distinguishing between tumor types.
+This CNN was selected as a baseine because it is easy to understand, fast to train, and well suited for recognizing localized features such as edges, textures, and shapes which are common when distinguishing between tumor types.
+
+#### Model 2 – ResNet18 (transfer learning)
+
+To test a deeper architecture with residual connections, a **ResNet18** model pre-trained on ImageNet was implemented. Residual blocks help gradients flow through deeper networks and can capture more complex features than our small CNN.   
+
+**Key modifications and configuration:**
+- **Input adaptation:** The original 3-channel first convolution was modified to accept a **1-channel** grayscale input.  
+- **Output head:** The final fully connected layer was replaced with a new linear layer producing **4 class logits**.   
+- **Initialization:** Initialized from ImageNet weights and fine-tuned the full network using the brain MRI dataset.
+- **Training:**  
+  - Loss: Cross-Entropy  
+  - Optimizer: Adam with learning rate `0.001`  
+  - Epochs: 20  
+  - Same `batch_size = 32` and transforms as the baseline CNN   
+
+ResNet18 was selected because it is a widely used residual network that is deeper than the baseline CNN but still lightweight, making it a good candidate for transfer learning on a medium-sized medical imaging dataset.
+
+#### Model 3 – EfficientNet-B0 (transfer learning)
+
+Finally, **EfficientNet-B0** with transfer learning wax implemented. EfficientNet architectures use compound scaling of depth, width, and resolution to provide strong performance with relatively few parameters. This makes EfficientNet-B0 a promising candidate for high accuracy under computational constraints. :contentReference[oaicite:16]{index=16}  
+
+Model customization:
+
+- **Base model:** `torchvision.models.efficientnet_b0(pretrained=True)`  
+- **Input adaptation:** Modify the first convolution in the feature extractor to accept a single grayscale channel. :contentReference[oaicite:17]{index=17}  
+- **Output head:** Replace the final classifier with a linear layer outputting 4 logits (one per class). :contentReference[oaicite:18]{index=18}  
+
+Training configuration:
+
+- Loss: Cross-Entropy  
+- Optimizer: Adam with learning rate `0.001`  
+- Epochs: 20  
+- Same batch size and transforms as the other models  
+- Model weights saved as `brain_tumor_efficientnet_b0.pth` for later evaluation   
+
+EfficientNet-B0 was chosen to represent a **modern, parameter-efficient architecture** that often outperforms older backbones in image classification, especially when fine-tuned on domain-specific data like MRI.
+
 
 ### Supervised Learning
 
