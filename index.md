@@ -315,11 +315,73 @@ These patterns confirm that the main difficulty is not in detecting the presence
 
 In summary, the convolutional model comparison clearly shows that while all three architectures are effective for brain tumor MRI classification, **EfficientNet-B0** provides the most accurate and reliable predictions, with the Baseline CNN serving as a strong, simpler alternative and ResNet18 offering competitive performance but with more pronounced weaknesses on certain tumor classes.
 
-### Next steps
+### SVM Model Analysis
 
-- **Model extensions:** Add two supervised transfer-learning approaches, fine-tuned ResNet-50 and EfficientNet-B0, for comparison on the same splits. This will help aliviate some of the accurracy issues between **glioma** and **meningioma**.
-- **Focused error analysis:** Further prioritize improvements on **glioma** ↔ **meningioma** separability such as targeted preprocessing or feature emphasis, and incorporate probability based evaluation plots to validate improvements.
-  
+#### Overall Performance  
+
+The Support Vector Machine (SVM) models were trained on flattened `256×256 grayscale images`, reduced with PCA to 100 components before classification. The main configuration used an RBF kernel with C = 10 and gamma = "scale". This RBF-kernel SVM achieved an **overall test accuracy of 96.41%**, correctly classifying **1,264 out of 1,311** test images.   
+
+The final perfomance for each class for the RBF SVM is summarized in Table 5 below. 
+
+*Table 5: Overall performance of the RBF SVM on the testing set (1,311 images).*
+| Class         | Precision | Recall | F1    |
+|---------------|----------:|------:|------:|
+| **glioma**    | 95.6%     | 93.7% | 94.6% |
+| **meningioma**| 95.9%     | 91.8% | 93.8% |
+| **pituitary** | 97.6%     | 100.0% | 98.8% |
+| **no tumor**  | 96.1%     | 99.0% | 97.5% |
+
+These metrics show that the SVM performs very well across all four classes, with particularly strong results for **pituitary** and **no tumor**, and slightly lower recall on **meningioma** and **glioma**, similar to the convolutional models.
+
+Polynomial-kernel SVMs were also tested, with:
+- **Degree-3 polynomial SVM:** test accuracy 96.26%, with macro F1 ≈ 0.96 (very close to the RBF model).  
+- **Degree-5 polynomial SVM:** test accuracy 93.21%, with macro F1 ≈ 0.93 and noticeably higher error rates, especially for glioma and meningioma.  
+
+Overall, the **RBF SVM** and **degree-3 polynomial SVM** are the best-performing SVM variants, with the RBF model used as the main point of reference.
+
+#### Confidence Summary  
+
+The SVM's confidence analysis reveals a clear separation between correct and incorrect predictions:
+- **Average confidence (correct predictions):** 0.9639 (96.39%)  
+- **Average confidence (incorrect predictions):** 0.7109 (71.09%)  
+- **Confidence gap:** ≈ 25 percentage points  
+
+This is the largest confidence gap observed across all models, meaning that when the SVM is wrong, it is significantly less confident on that desition. In practice, this makes the SVM a good candidate for confidence based rejection rules, where low confidence predictions could be flagged for human review. This isnt a good fit four our end goal, however, which is serving as a second opinion model for doctors.
+
+#### Visualization Results  
+
+Figure 8 below shows the confusion matrix for the RBF SVM model. Analysis of this matrixs reveals results that mirror those given by the three convolutional models:
+- Near-perfect performance on **pituitary** and **no tumor**, with almost all samples on the diagonal of the confusion matrix.  
+- A small cluster of errors between **glioma** and **meningioma**, matching the main setbacks seen in the convolutional models.  
+- Very few misclassifications overall (47 out of 1,311 samples), distributed mainly across the tumor subtypes rather than between tumor vs. no-tumor.
+
+![Figure 9](assets/images/Figure9.png)
+*Figure 9: Confusion matrix of SVM (RBF Version) predictions on the test dataset.*
+
+These patterns suggest that even without learned convolutional filters, the SVM can separate most classes well once the high dimensional image data is compressed into a 100-dimensional PCA space.
+
+Overall, the SVM serves as a strong classical baseline that nearly matches the best convolutional models on this dataset while providing especially interpretable confidence behavior.
+
+### Final Takeways and Next Steps
+
+#### Key Takeaways  
+
+Across all models evaluated, the project yields several consistent findings:
+- **High overall performance:** All main models achieve test accuracies **above 91%**, with the best-performing architectures (EfficientNet-B0 and the RBF SVM) reaching around **96–98% accuracy** on 1,311 test images.   
+- **Robust detection of “no tumor” and pituitary:** Every model, including the SVM, classifies **no tumor** and **pituitary** cases with excellent recall and precision, indicating that the dataset provides strong distinguishing features for these classes.   
+- **Persistent confusion between glioma and meningioma:** The main source of error across all approaches is confusion between **glioma** and **meningioma**, which share similar textures and shapes in the MRIs. This suggests that the limitation lies partly in the underlying data and class similarity, not just in the model choice.   
+
+Taken together, these results show that modern CNNs and classical SVMs can both deliver reliable performance on this four class brain MRI task, with EfficientNet-B0 emerging as the strongest single model and the SVM providing a competitive, more traditional alternative.
+
+#### Next Steps  
+
+Future work could extend this project along several directions:
+- **Cross-validation and external validation:** Use k-fold cross-validation and, if available, an external dataset from a different hospital to better estimate real world performance.  
+- **Multi-sequence or 3D data:** Incorporate additional MRI sequences or 3D volumetric information to capture richer tumor structure which could help more clearly differntiate glioma and meningioma cases.  
+- **Clinical integration:** Design an clear user interface where model predictions, confidence scores, and visual explanations are displayed together, supporting radiologists as a second opinion without replacing their judgment.
+
+Overall, the results indicate that deep learning models, especially EfficientNet-B0, are well-suited for automated brain tumor classification, and that combining them with classical methods and uncertainty-aware strategies is a promising path toward safe, clinically useful decision support tools.
+
 # References
 
 [1] K. He, X. Zhang, S. Ren, and J. Sun, “Deep Residual Learning for Image Recognition,” in Proc. CVPR, 2016. 
@@ -334,10 +396,10 @@ In summary, the convolutional model comparison clearly shows that while all thre
 | Name                  | Proposal Contribution                |
 |-----------------------|--------------------------------------|
 | **Colin Shaw**        | Data Processing and Preparation |
-| **Eduardo Romero Serra** | Team Organization / Report Writting / Gantt Chart |
-| **Vinayak Ramasubramanian** | Accurracy / Precision / Visualization |
-| **Xingjian Ren**      | Accurracy / Precision / Visualization |
-| **Matthew Sampt**     | PyTorch Model Training / Model Testing |
+| **Eduardo Romero Serra** | Team Organization / Report Writting / Gantt Chart / Presentation |
+| **Vinayak Ramasubramanian** | ResNet18 Model / EfficientNet-B0 Model |
+| **Xingjian Ren**      | SVM Model |
+| **Matthew Sampt**     | Baseline CNN Model |
 
 # [Gantt Chart](https://docs.google.com/spreadsheets/d/1DeXpFdrviHhOgzM-KoJsPBr04g7CaRDW/edit?usp=sharing&ouid=112407754076113639711&rtpof=true&sd=true)
 
