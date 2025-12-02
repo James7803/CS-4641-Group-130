@@ -172,7 +172,7 @@ For both splits the average prediction confidence is high, with Training 0.9982 
 The confusion matrices in Figure 4 highlight class specific behavior, with **No tumor** and **pituitary** classes being classified almost perfectly. Most errors occur between **glioma** and **meningioma** classes, which are visually similar on some slices, which causes the model to occasionally confuse these two. This visualization reveals that altough the model is mostly accurrate, it has some trouble identifying differences in images that share multiple similarities.
 
 ![Figure 4](assets/images/Confusion_Matrices.png)
-*Figure 4: Confusion matrices for Training (left) and Testing (right).*
+*Figure 4: Confusion matrices for Training (left) and Testing (right) on Baseline CNN model.*
 
 #### Model Perfomance
 
@@ -180,6 +180,140 @@ Overall this model perfomed well and was consistent at identifying and different
 - **Consistent inputs:** Data processing was key to success, with grayscale conversion, normalization, and resizing to 256×256 providing uniform inputs for learning.
 - **CNN inductive bias:** Convolutions captured local edges, textures, and shapes that distinguishd tumor types, which fit this task well.
 - **Stable optimization:** Minimizing cross-entropy loss with the Adam optimizer provided smooth and efficient convergence.
+
+### Individual Model Analysis – ResNet18
+
+#### Overall Performance
+
+The ResNet18 model achieved a strong overall performance with a **testing accuracy of 91.46%**. Out of 1,311 test images, **1,199 were correctly classified** and **112 were misclassified**.  
+Performance metrics for each tumor class are summarized in Table 2.
+
+*Table 2: Overall performance on the testing set (1,311 images)*  
+| Class            | Precision | Recall | F1    | Support |
+|------------------|----------:|------:|------:|--------:|
+| **glioma**       | 0.910     | 0.977 | 0.942 | 300     |
+| **meningioma**   | 0.950     | 0.745 | 0.835 | 306     |
+| **no tumor**     | 0.997     | 0.941 | 0.968 | 405     |
+| **pituitary**    | 0.809     | 0.990 | 0.891 | 300     |
+| **Macro Avg.**   | **0.917** | **0.913** | **0.909** | – |
+
+In general, Glioma and no tumor classes achieve excellent balance between precision/recall, while meningioma remains the most challenging class to identify accurately.
+
+#### Confidence Summary
+
+Prediction confidence remained high across the board:
+- **Correct predictions:** 0.9843 ± 0.05  
+- **Incorrect predictions:** 0.8738 ± 0.13  
+- ~11% confidence gap suggests confidence still trends upward even when wrong
+
+This indicates solid certainty in model predictions, with room for calibration improvements.
+
+#### Visualization Results
+
+The confusion matrix in Figure 5 highlights where misclassifications occur:
+- **Glioma** and **no tumor** → rarely confused, high diagonal dominance  
+- **Pituitary** → high recall but lower precision due to false positives  
+- **Meningioma** → lowest recall, commonly misclassified as glioma or pituitary  
+
+![Figure 5](assets/images/Confusion_Matrices.png)
+*Figure 5: Confusion matrix of ResNet18 predictions on the test dataset.*
+
+#### Model Performance
+
+Overall this mode had a succesful performance with a high testing accurracy. Why?
+- **Residual connections** improves deep feature learning  
+- **Transfer learning** offers strong generalization starting point  
+- **High confidence scoring** reinforces prediction reliability  
+
+However, the model suffered a lot in confussions between glioma and meningioma. Why?
+- **Overfitting risk:** There is a noticeable gap between training and testing accuracy 
+- **Tumor similarity issues:** Visual overlap between MRIs causes recurring misclassifications  
+- **Calibration needed:** The model tends to remain highly confident even when wrong  
+
+Overall, ResNet18 demonstrates robust classification ability with high confidence, but struggles on tumors that share strong texture/shape similarities.
+
+### Individual Model Analysis – EfficientNet-B0
+
+#### Overall Performance  
+
+The EfficientNet-B0 model achieved the best overall performance among the evaluated convolutional architectures, with a **testing accuracy of 97.94%** on the 1,311-image test set. In total, **1,284 samples were correctly classified**, and only **27 samples were misclassified**. The performance metrics for each class are summarized in Table 3.  
+
+*Table 3: Overall performance of EfficientNet-B0 on the testing set (1,311 images).*  
+| Class            | Precision | Recall | F1    | Support |
+|------------------|----------:|-------:|------:|--------:|
+| **glioma**       | 0.9736    | 0.9833 | 0.9784 | 300    |
+| **meningioma**   | 0.9607    | 0.9575 | 0.9591 | 306    |
+| **no tumor**     | 0.9854    | 1.0000 | 0.9926 | 405    |
+| **pituitary**    | 0.9966    | 0.9700 | 0.9831 | 300    |
+| **Macro avg.**   | **0.9791** | **0.9777** | **0.9783** | – |
+
+Overall, all four classes show high and balanced precision, recall, and F1-scores, with macro-averaged F1 close to 0.98. Its important to note that:  
+- **No tumor** samples achieve perfect recall (1.00) and very high precision.  
+- **Glioma**, **meningioma**, and **pituitary** all maintain F1-scores above 0.95, indicating consistently strong performance across tumor types.  
+
+#### Confidence Summary  
+
+EfficientNet-B0 also produces very confident predictions on the test set. The confidence analysis reports:  
+- **Correct predictions:** 0.9890 (98.90%)  
+- **Incorrect predictions:** 0.8027 (80.27%)  
+
+There is an 18% confidence gap which suggests that correct classifications are typically made with near-maximal confidence, which is desirable for a high-stakes classification task. However, misclassifications tend to be less confident, which could be useful if combined with thresholding or rejection rules.  
+
+#### Visualization Results  
+
+Figure 6 shows the confusion matrix for EfficientNet-B0 on the test set and illustrates how the model distributes its predictions across the four classes:  
+- Most entries lie along the diagonal, confirming the strong quantitative performance seen in Table 3.  
+- No tumor samples are almost never confused with tumor classes, reflecting their perfect recall.  
+- The remaining misclassifications are very rate and typically happen between tumor categories with overlapping visual characteristics such as glioma and meningioma.  
+
+![Figure 6](assets/images/Confusion_Matrices.png)
+*Figure 6: Confusion matrix of EfficientNEt-B0 predictions on the test dataset.*
+
+#### Model Performance  
+
+EfficientNet-B0’s strong performance on this MRI classification task can be attributed to its compoound scaling strategy, which allows the model to extract detailed spatial features while remaining relatively parameter efficient. This model also relies on pretraining on a large dataset followed by fine tuning done on our specific dataset, which provides rich generic visual features that adapt well to medical imaging. Overall, EfficientNet-B0 behaves as a **high-accuracy, high-confidence classifier**, with minimal performance degradation across classes and a confusion matrix that closely matches the ideal diagonal structure.
+
+### Convolutional Model Results Comparison
+
+This section compares the performance for the three convolutional architectures analyzed above:
+
+#### Quantitative Performance
+
+Table 4 summarizes the main quantitative metrics for each convolutional model on the 1,311-image testing set.
+
+*Table 4: Summary of convolutional model performance on the testing set (1,311 images).*
+| Model           | Test Accuracy | Macro Precision | Macro Recall | Macro F1 | Avg. Conf. (Correct) | Avg. Conf. (Incorrect) |
+|-----------------|--------------:|----------------:|-------------:|---------:|----------------------:|------------------------:|
+| **Baseline CNN**| 0.9634        | 0.962           | 0.960        | 0.961    | 0.9883               | 0.8552                 |
+| **ResNet18**    | 0.9146        | 0.917           | 0.913        | 0.909    | 0.9843               | 0.8738                 |
+| **EfficientNet-B0** | 0.9794    | 0.9791          | 0.9777       | 0.9783   | 0.9890               | 0.8027                 |
+
+- **EfficientNet-B0** achieves the **highest overall accuracy** and **best macro-averaged metrics**, only misclassifying 27 samples.
+- The **Baseline CNN** also performs very well, with accuracy above 96% and balanced precision/recall across all classes.
+- **ResNet18** trails behind both, with lower macro F1 and noticeably more misclassifications, especially for the meningioma class.
+
+Figure 7 below illustrates the training and validation behavior across the three convolutional models. All models show smooth declines in training loss and steady increases in training accuracy, indicating effective learning. EfficientNet-B0 consistently reaches the lowest validation loss and highest validation accuracy throughout training, reflecting its strong generalization capabilities. The Baseline CNN also maintains stable validation performance with minimal overfitting, while ResNet18 exhibits more variability in validation loss and accuracy, aligning with its comparatively lower test performance.
+
+![Figure 7](assets/images/Confusion_Matrices.png)
+*Figure 7: Training and validation loss/accuracy comparison across the three convolutional architectures.*
+
+#### Error Patterns and Confusion Matrices
+
+Across all three models, the confusion matrices show similar qualitative patterns:
+
+- **“No tumor”** and **“pituitary”** are the most reliably classified classes:
+  - Baseline CNN and EfficientNet-B0 achieve almost perfect performance for these categories.
+  - ResNet18 maintains strong performance here, but with slightly more errors.
+- **“Glioma” vs. “meningioma”** remains the main source of confusion:
+  - Baseline CNN and ResNet18 frequently misclassify between these two tumor types.
+  - EfficientNet-B0 still shows some confusion between them, but at a much lower rate, as reflected by its higher F1 scores.
+
+These patterns confirm that the main difficulty is not in detecting the presence of a tumor vs. no tumor, but in distinguishing between specific tumor subtypes that can appear visually similar in certain slices.
+
+![Figure 8](assets/images/Confusion_Matrices.png)
+*Figure 7: Side by side comparison of confusion matrices for all three convolutional models.*
+
+In summary, the convolutional model comparison clearly shows that while all three architectures are effective for brain tumor MRI classification, **EfficientNet-B0** provides the most accurate and reliable predictions, with the Baseline CNN serving as a strong, simpler alternative and ResNet18 offering competitive performance but with more pronounced weaknesses on certain tumor classes.
 
 ### Next steps
 
