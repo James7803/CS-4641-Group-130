@@ -216,6 +216,7 @@ The confusion matrix in Figure 5 highlights where misclassifications occur:
 - **Meningioma** → lowest recall, commonly misclassified as glioma or pituitary  
 
 ![Figure 5](assets/images/Figure5.png)
+
 *Figure 5: Confusion matrix of ResNet18 predictions on the test dataset.*
 
 #### Model Performance
@@ -356,6 +357,7 @@ Figure 8 below shows the confusion matrix for the RBF SVM model. Analysis of thi
 - Very few misclassifications overall (47 out of 1,311 samples), distributed mainly across the tumor subtypes rather than between tumor vs. no-tumor.
 
 ![Figure 9](assets/images/Figure9.png)
+
 *Figure 9: Confusion matrix of SVM (RBF Version) predictions on the test dataset.*
 
 These patterns suggest that even without learned convolutional filters, the SVM can separate most classes well once the high dimensional image data is compressed into a 100-dimensional PCA space.
