@@ -152,6 +152,7 @@ A a dataset of **1,311 images** was used to report all metrics.
 The Accurracy and Preciision/Recall/F1/Support values gathered from running the trained model over a testing set of 1,311 images can bee seen in Table 1. Of the 1,311 testing samples, only 48 showed errors when classifying, with a final **Accuracy:** 96.34%.
 
 *Table 1: Overall performance (Testing set, 1,311 images)*
+
 | Class            | Precision | Recall | F1    | Support |
 |------------------|----------:|------:|------:|--------:|
 | **glioma**       | 0.952     | 0.927 | 0.939 | 300     |
@@ -189,6 +190,7 @@ The ResNet18 model achieved a strong overall performance with a **testing accura
 Performance metrics for each tumor class are summarized in Table 2.
 
 *Table 2: Overall performance on the testing set (1,311 images)*  
+
 | Class            | Precision | Recall | F1    | Support |
 |------------------|----------:|------:|------:|--------:|
 | **glioma**       | 0.910     | 0.977 | 0.942 | 300     |
@@ -240,6 +242,7 @@ Overall, ResNet18 demonstrates robust classification ability with high confidenc
 The EfficientNet-B0 model achieved the best overall performance among the evaluated convolutional architectures, with a **testing accuracy of 97.94%** on the 1,311-image test set. In total, **1,284 samples were correctly classified**, and only **27 samples were misclassified**. The performance metrics for each class are summarized in Table 3.  
 
 *Table 3: Overall performance of EfficientNet-B0 on the testing set (1,311 images).*  
+
 | Class            | Precision | Recall | F1    | Support |
 |------------------|----------:|-------:|------:|--------:|
 | **glioma**       | 0.9736    | 0.9833 | 0.9784 | 300    |
@@ -283,6 +286,7 @@ This section compares the performance for the three convolutional architectures 
 Table 4 summarizes the main quantitative metrics for each convolutional model on the 1,311-image testing set.
 
 *Table 4: Summary of convolutional model performance on the testing set (1,311 images).*
+
 | Model           | Test Accuracy | Macro Precision | Macro Recall | Macro F1 | Avg. Conf. (Correct) | Avg. Conf. (Incorrect) |
 |-----------------|--------------:|----------------:|-------------:|---------:|----------------------:|------------------------:|
 | **Baseline CNN**| 0.9634        | 0.962           | 0.960        | 0.961    | 0.9883               | 0.8552                 |
@@ -325,6 +329,7 @@ The Support Vector Machine (SVM) models were trained on flattened `256×256 gray
 The final perfomance for each class for the RBF SVM is summarized in Table 5 below. 
 
 *Table 5: Overall performance of the RBF SVM on the testing set (1,311 images).*
+
 | Class         | Precision | Recall | F1    |
 |---------------|----------:|------:|------:|
 | **glioma**    | 95.6%     | 93.7% | 94.6% |
