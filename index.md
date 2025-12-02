@@ -402,10 +402,10 @@ Overall, the results indicate that deep learning models, especially EfficientNet
 
 | Name                  | Proposal Contribution                |
 |-----------------------|--------------------------------------|
-| **Colin Shaw**        | Data Processing and Preparation |
-| **Eduardo Romero Serra** | Team Organization / Report Writting / Gantt Chart / Presentation |
+| **Colin Shaw**        | Data Processing and Preparation / Gantt Chart |
+| **Eduardo Romero Serra** | Team Organization / Report Writing / Results Analysis|
 | **Vinayak Ramasubramanian** | ResNet18 Model / EfficientNet-B0 Model |
-| **Xingjian Ren**      | SVM Model |
+| **Xingjian Ren**      | SVM Model / Results Analysis |
 | **Matthew Sampt**     | Baseline CNN Model |
 
 # [Gantt Chart](https://docs.google.com/spreadsheets/d/1DeXpFdrviHhOgzM-KoJsPBr04g7CaRDW/edit?usp=sharing&ouid=112407754076113639711&rtpof=true&sd=true)
