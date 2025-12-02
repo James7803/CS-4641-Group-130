@@ -189,7 +189,7 @@ Overall this model perfomed well and was consistent at identifying and different
 The ResNet18 model achieved a strong overall performance with a **testing accuracy of 91.46%**. Out of 1,311 test images, **1,199 were correctly classified** and **112 were misclassified**.  
 Performance metrics for each tumor class are summarized in Table 2.
 
-*Table 2: Overall performance on the testing set (1,311 images)*  
+*Table 2: Overall performance of RestNet18 on the testing set (1,311 images)*  
 
 | Class            | Precision | Recall | F1    | Support |
 |------------------|----------:|------:|------:|--------:|
