@@ -106,7 +106,7 @@ Training configuration:
 
 EfficientNet-B0 was chosen to represent a **modern, parameter-efficient architecture** that often outperforms older backbones in image classification, especially when fine-tuned on domain-specific data like MRI.
 
-### Convolutional Machine Learning Models
+### Classical Model Approach
 
 #### Model 4 – Support Vector Machine (SVM) Classifier
 
@@ -133,7 +133,7 @@ This approach transforms all training and testing images into a consistent numer
 - Offers a **reference benchmark** against deep neural models
 - Ability to perform well on **smaller or noise-sensitive** feature spaces
 
-This SVM setup tests whether neural network feature extraction combined with a simpler classifier can rival — or even outperform — full deep learning pipelines for brain MRI classification.
+This SVM setup tests whether neural network feature extraction combined with a simpler classifier can rival or outperform full deep learning pipelines for brain MRI classification.
 
 # Results
 
