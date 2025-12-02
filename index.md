@@ -40,7 +40,7 @@ Images are then read from class labeled directories. The team used PyTorch DataL
 ![Figure 2](src/dataset/Training/notumor/Tr-no_0393.jpg)\
 *Figure 2. Example MRI slice labeled "no tumor."*
 
-### Machine Learning Models
+### Convolutional Machine Learning Models
 
 Three supervised convolutional architectures were evaluated on the same preprocessed dataset and training/testing conditions:
 
@@ -106,12 +106,34 @@ Training configuration:
 
 EfficientNet-B0 was chosen to represent a **modern, parameter-efficient architecture** that often outperforms older backbones in image classification, especially when fine-tuned on domain-specific data like MRI.
 
+### Convolutional Machine Learning Models
 
-### Supervised Learning
+#### Model 4 – Support Vector Machine (SVM) Classifier
 
-The task is framed as four-class supervised classification with labels glioma, meningioma, pituitary, and no tumor. Labeled images are fed in small batches, the CNN predicts class logits, and the model is updated by minimizing cross-entropy loss with `Adam`. Standard metrics like accuracy, precision, recall, and F1 are reported and confusion matrices are visualized in *Results* to understand which tumor types are most often confused by the model.
+To evaluate a traditional machine learning approach alongside the neural architectures, a **Support Vector Machine (SVM)** classifier was implemented using scikit-learn. Instead of raw MRI pixels, which are high dimensional and difficult for classical models to generalize on, we extracted compressed deep features from the **trained EfficientNet-B0 model** and used them as fixed input representations. This allows the SVM to take advantage of strong CNN-learned feature embeddings while reducing computational complexity and overfitting risk.
 
-In parallel, two additional supervised transfer-learning models, fine-tuned *ResNet-50* and *EfficientNet-B0*, are being developed for comparison, while an **unsupervised k-Means clustering** approach is also being explored to group MRI features without labels as a potential addition for the final product.
+**Feature Extraction Workflow**
+1. Loaded EfficientNet-B0 model with learned weights fixed.
+2. Removed the classification head to output the penultimate feature vector.
+3. Passed each MRI image once through EfficientNet-B0 to extract a **high-level feature embedding**.
+4. Flattened embeddings and stored them with corresponding class labels for scikit-learn.
+
+This approach transforms all training and testing images into a consistent numerical feature space suitable for classical ML algorithms.
+
+**SVM Classifier Configuration**
+- Library: scikit-learn SVC
+- Kernel: **RBF**
+- Regularization: C = 1.0
+- Gamma: “scale”
+- Output: One-vs-One decision strategy for multi-class tumor classification
+
+**Why SVM?**
+- Provides a **strong margin-based classifier** with proven success on medical imaging feature vectors
+- Avoids full end-to-end retraining → **faster experimentation**
+- Offers a **reference benchmark** against deep neural models
+- Ability to perform well on **smaller or noise-sensitive** feature spaces
+
+This SVM setup tests whether neural network feature extraction combined with a simpler classifier can rival — or even outperform — full deep learning pipelines for brain MRI classification.
 
 # Results
 
