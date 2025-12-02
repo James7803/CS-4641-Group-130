@@ -137,10 +137,19 @@ This SVM setup tests whether neural network feature extraction combined with a s
 
 # Results
 
-The implemented Convolutional Neural Network (CNN) achieves strong performance on the Brain Tumor MRI dataset. This section reports the model's overall accuracy, class-wise precision/recall/F1, confidence statistics, and confusion matrices to show where the model succeeds and where it tends to make mistakes.
+Four approaches were evaluated to conduct brain tumor classification using MRI:  
+1) Baseline CNN
+2) ResNet18
+3) EfficientNet-B0
+4) SVM with deep features.
 
-**Overall performance:** The Accurracy and Preciision/Recall/F1/Support values gathered from running the trained model over a testing set of 1,311 images can bee seen in Table 1. Of the 1,311 testing samples, only 48 showed errors when classifying.
-- **Accuracy:** 96.34%
+A a dataset of **1,311 images** was used to report all metrics.
+
+### Individual Model Analysis - Baseline CNN
+
+#### Overall Performance
+
+The Accurracy and Preciision/Recall/F1/Support values gathered from running the trained model over a testing set of 1,311 images can bee seen in Table 1. Of the 1,311 testing samples, only 48 showed errors when classifying, with a final **Accuracy:** 96.34%.
 
 *Table 1: Overall performance (Testing set, 1,311 images)*
 | Class            | Precision | Recall | F1    | Support |
@@ -151,35 +160,26 @@ The implemented Convolutional Neural Network (CNN) achieves strong performance o
 | **pituitary**    | 0.990     | 0.993 | 0.992 | 300     |
 | **Macro averages** | **0.962** | **0.960** | **0.961** | – |
 
+#### Confidence Summary
 
-**Confidence summary:** For both splits the average prediction confidence is high, with Training 0.9982 ± 0.0142 and Testing 0.9835 ± 0.0638. On the test set, correct predictions are more confident (0.9883 ± 0.0524) than incorrect ones (0.8552 ± 0.1486), which is consistent with a well-behaved classifier. These values can be seen in further detail on Figure 3 below.
+For both splits the average prediction confidence is high, with Training 0.9982 ± 0.0142 and Testing 0.9835 ± 0.0638. On the test set, correct predictions are more confident (0.9883 ± 0.0524) than incorrect ones (0.8552 ± 0.1486), which is consistent with a well-behaved classifier. These values can be seen in further detail on Figure 3 below.
 
 ![Figure 3](assets/images/Comprehensive_Model_Evaluation_Report.png)
 *Figure 3: Summary of accuracy, class-wise metrics, and confidence statistics.*
 
-### Visualization Results
+#### Visualization Results
 
 The confusion matrices in Figure 4 highlight class specific behavior, with **No tumor** and **pituitary** classes being classified almost perfectly. Most errors occur between **glioma** and **meningioma** classes, which are visually similar on some slices, which causes the model to occasionally confuse these two. This visualization reveals that altough the model is mostly accurrate, it has some trouble identifying differences in images that share multiple similarities.
 
 ![Figure 4](assets/images/Confusion_Matrices.png)
 *Figure 4: Confusion matrices for Training (left) and Testing (right).*
 
-Figure 5 shows the training validation loss curves across epochs. These curves confirm that the model converged steadily within ten epochs, with training loss decreasing smoothly and validation loss stabilizing after minor fluctuation. This indicates that the CNN generalized well and without significant overfitting.
-
-![Figure 5](assets/images/LossvsEpoch.PNG)\
-*Figure 5: Training and validation loss curves across epochs.*
-
-### Model Perfomance
+#### Model Perfomance
 
 Overall this model perfomed well and was consistent at identifying and differentiating brain tumor in the majority of cases. Why?
 - **Consistent inputs:** Data processing was key to success, with grayscale conversion, normalization, and resizing to 256×256 providing uniform inputs for learning.
 - **CNN inductive bias:** Convolutions captured local edges, textures, and shapes that distinguishd tumor types, which fit this task well.
 - **Stable optimization:** Minimizing cross-entropy loss with the Adam optimizer provided smooth and efficient convergence.
-
-An overall Performance Report can be seen in Figure 6 below.
-
-![Figure 6](assets/images/Brain_Tumor_Classification_Model_Comprehensive_Report.png)
-*Figure 6: Brain Tumor Classification - Perfomance Report.*
 
 ### Next steps
 
