@@ -1,3 +1,5 @@
+This is a clone of the repo of my course project, Brain Tumor Classification.
+
 # Brain Tumor Classification Project
 
 ## All directories and files related to the contents of the project:
